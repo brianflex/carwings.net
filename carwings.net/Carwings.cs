@@ -189,7 +189,11 @@ namespace carwings.net
             }
             else
             {
-                Exception e = new Exception("Unexpected Response from Carwings: " + response.StatusCode);
+                Exception e;
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    e = new Exception("NissanConnect EV says you are not authorized.  Is your password incorrect?");
+                else
+                    e = new Exception("Unexpected Response from NissanConnect EV: " + response.StatusCode);
                 e.Data["URL"] = response.RequestMessage.RequestUri;
                 e.Data["ResponseStatusCode"] = response.StatusCode;
                 if (response.Content != null)
