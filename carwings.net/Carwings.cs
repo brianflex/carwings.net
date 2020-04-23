@@ -9,6 +9,10 @@ using Newtonsoft.Json.Serialization;
 
 namespace carwings.net
 {
+    // Note: Two other Nissan library uses https://gdcportalgw.its-mo.com/api_v190426_NE/gdc/
+    // But they also encrypt the password and do a bunch of other things differently.
+    // Details:  https://github.com/gboudreau/nissan-connect-php/blob/master/NissanConnect.class.php
+    // A second alternative library:  https://github.com/hagronnestad/leaf-display/blob/master/LeafDisplay/LeafLib/LeafClient.cs
     public class Carwings
     {
         private const string baseUrl = "https://icm.infinitiusa.com/NissanLeafProd/rest";
@@ -191,7 +195,7 @@ namespace carwings.net
             {
                 Exception e;
                 if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    e = new Exception("NissanConnect EV says you are not authorized.  Is your password incorrect?");
+                    e = new NissanConnectEVUnauthorizedException("NissanConnect EV says you are not authorized.  Is your password incorrect?");
                 else
                     e = new Exception("Unexpected Response from NissanConnect EV: " + response.StatusCode);
                 e.Data["URL"] = response.RequestMessage.RequestUri;
