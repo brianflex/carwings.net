@@ -196,6 +196,8 @@ namespace carwings.net
                 Exception e;
                 if (response.StatusCode == HttpStatusCode.Unauthorized)
                     e = new NissanConnectEVUnauthorizedException("NissanConnect EV says you are not authorized.  Is your password incorrect?");
+                else if (response.StatusCode == (HttpStatusCode)910)
+                    e = new Exception("NissanConnect EV said try again later.");
                 else
                     e = new Exception("Unexpected Response from NissanConnect EV: " + response.StatusCode);
                 e.Data["URL"] = response.RequestMessage.RequestUri;

@@ -15,6 +15,9 @@ namespace carwings.net
         [JsonProperty("modelyear")]
         public int ModelYear { get; set; }
 
+        [JsonProperty("modelcode")]
+        public int? ModelCode { get; set; }
+
         [JsonProperty("nickname")]
         public string Nickname { get; set; }
 
@@ -23,5 +26,8 @@ namespace carwings.net
 
         [JsonProperty("interiorTempRecords")]
         public TemperatureRecord InteriorTemperatureRecord { get; set; }
+
+        [JsonProperty("extcolor")]
+        public string ExternalColor { get; set; }
     }
 }

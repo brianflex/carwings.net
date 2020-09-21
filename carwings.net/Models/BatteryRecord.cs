@@ -72,13 +72,24 @@ namespace carwings.net
         public string Charging { get; set; }
 
         /// <summary>
-        /// Seems to be 100 often.  Not clear if this is the desired SoC, or some measurement of battery degradation (ie, 80% after 2 years in LA)
+        /// Seems to be 100 often.  Not clear if this is the desired SoC, or some measurement of battery degradation (ie, 80% after 2 years in LA).
+        /// This may be the number of kilometers of range for the battery's total capacity.
         /// </summary>
         [JsonProperty("batteryCapacity")]
         public int Capacity { get; set; }
 
+        /// <summary>
+        /// This might be the number of kilometers of range based on the current SoC, rounded a little bit.
+        /// </summary>
         [JsonProperty("batteryRemainingAmount")]
         public int Remaining { get; set; }
+
+        /// <summary>
+        /// Battery remaining in Watt-hours.
+        /// </summary>
+        /// <remarks>Not clear when this was added (before Q4 2018), but newer Leafs may provide this.</remarks>
+        [JsonProperty("batteryRemainingAmountWH")]
+        public int? BatteryRemainingAmountWH { get; set; }
 
         /// <summary>
         /// State of charge.  Note the Remaining field also seems equivalent.  It's not clear when they would differ.
